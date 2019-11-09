@@ -4,10 +4,16 @@ import axios from "axios";
 import "./Typeahead.css";
 
 class Typeahead extends React.Component {
-  state = { suggestions: [] };
+  state = { suggestions: [], q: "" };
 
-  componentDidMount() {
-    axios.get("/search").then(res => {
+  handleChange = event => {
+    let q = event.target.value;
+    this.fetchSuggestions(q);
+    this.setState({ q });
+  };
+
+  fetchSuggestions(q) {
+    axios.get("/search", { params: { q: q } }).then(res => {
       this.setState({ suggestions: res.data });
     });
   }
@@ -21,7 +27,7 @@ class Typeahead extends React.Component {
   render() {
     return (
       <div className="Typeahead">
-        <input type="text" name="q" />
+        <input type="text" value={this.state.q} onChange={this.handleChange} />
         <ul>{this.renderSuggestions()}</ul>
       </div>
     );
