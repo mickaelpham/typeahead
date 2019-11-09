@@ -1,0 +1,11 @@
+.Typeahead {
+  max-width: 500px;
+  margin: auto;
+}
+
+.Typeahead input[type="text"] {
+  width: 100%;
+  font-size: 2em;
+  font-weight: 300;
+  padding: 0.2em 0.35em;
+}
